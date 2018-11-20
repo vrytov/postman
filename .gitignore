@@ -3,3 +3,6 @@
 ################################################################################
 
 /Postman/bin/Debug
+/Postman/obj/Debug
+/Postman/packages
+/Postman/.vs/Postman/v15
