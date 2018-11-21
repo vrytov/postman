@@ -6,3 +6,5 @@
 /Postman/obj/Debug
 /Postman/packages
 /Postman/.vs/Postman/v15
+/Postman.Tests/obj/Debug
+/Postman.Tests/bin/Debug

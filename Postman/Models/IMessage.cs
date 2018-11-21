@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Postman.Models
 {
-    internal interface IMessage
+    public interface IMessage
     {
-        IEnumerable<KeyValuePair<string, string>> Headers { get; set; }
+        IEnumerable<KeyValuePair<string, string>> Headers { get; }
 
-        IEnumerable<string> From { get; set; }
-        IEnumerable<string> To { get; set; }
+        IList<string> From { get; }
+        IList<string> To { get; }
 
-        string Subject { get; set; }
-        string Content { get; set; }
-        string Html { get; set; }
+        string Subject { get; }
+        string TextBody { get; }
+        string HtmlBody { get; }
 
         void WriteTo(Stream stream);
     }

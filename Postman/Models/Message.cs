@@ -9,7 +9,7 @@ namespace Postman.Models
 {
     public class Message
     {
-        private readonly MimeMessage _message = new MimeMessage();
+        private readonly IMessage _message;
 
         public Message()
         {

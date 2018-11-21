@@ -5,57 +5,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MimeKit;
+using MimeKit.Utils;
 
 namespace Postman.Models
 {
-    internal class MailkitMessage : IMessage
+    public class MailkitMessage : IMessage
     {
         public IEnumerable<KeyValuePair<string, string>> Headers
         {
             get { return Message.Headers.Select(x => new KeyValuePair<string, string>(x.Field, x.Value)); }
-
-            set
-            {                
-                Message.Headers.Clear();
-
-                if (value == null)
-                    return;
-
-                foreach (var pair in value)
-                {
-                    Message.Headers.Add(pair.Key, pair.Value);
-                }
-            }
         }
 
-        public IEnumerable<string> From
+        public IList<string> From
         {
-            get
-            {
-                return Message.From.Select(x => x.Name);
-            }
-
-            set
-            {
-                Message.From.Clear();
-
-                if (value == null)
-                    return;
-
-                foreach (var address in value)
-                {
-                    //Message.From.Add(new );
-                }
-            }
+            get { return Message.From.OfType<MailboxAddress>().Select(x => x.Address).ToList(); }
         }
 
-        public IEnumerable<string> To { get; set; }
+        public IList<string> To
+        {
+            get { return Message.To.OfType<MailboxAddress>().Select(x => x.Address).ToList(); }
+        }
 
-        public string Subject { get; set; }
-        public string Content { get; set; }
-        public string Html { get; set; }
+        public string Subject
+        {
+            get { return Message.Subject; }
+        }
 
-        public MimeMessage Message { get; set; } = new MimeMessage();
+        public string TextBody
+        {
+            get { return Message.TextBody; }
+        }
+
+        public string HtmlBody
+        {
+            get { return Message.HtmlBody; }
+        }
+
+        private MimeMessage Message { get; set; }
 
         public void WriteTo(Stream stream)
         {
@@ -65,6 +51,76 @@ namespace Postman.Models
         public static IMessage CreateFromStream(Stream stream)
         {
             return new MailkitMessage{ Message = MimeMessage.Load(stream) };
+        }
+
+        public class MessageBuilder : IMessageBuilder
+        {
+            private MimeMessage _message = new MimeMessage();
+            private MailkitMessage _result = new MailkitMessage();
+            private BodyBuilder _bodyBuilder = new BodyBuilder();
+
+            public IMessage Result
+            {
+                get
+                {
+                    _message.Body = _bodyBuilder.ToMessageBody();
+                    return _result;
+                }
+            }
+
+            public MessageBuilder()
+            {
+                _result.Message = _message;
+            }
+
+            public void Reset()
+            {
+                _message = new MimeMessage();
+                _result = new MailkitMessage {Message = _message};
+                _bodyBuilder = new BodyBuilder();
+            }
+
+            public void SetTextBody(string textBody)
+            {
+                _bodyBuilder.TextBody = textBody;
+            }
+
+            public void SetHtmlBody(string htmlBody)
+            {
+                _bodyBuilder.HtmlBody = htmlBody;
+            }
+
+            public void AddFrom(string email)
+            {
+                _message.From.Add(new MailboxAddress(email));
+            }
+
+            public void RemoveFrom(string email)
+            {
+                var address = _message.From.OfType<MailboxAddress>().FirstOrDefault(x => x.Address == email);
+                if (address != null)
+                    _message.From.Remove(address);
+            }
+
+            public void AddTo(string email)
+            {
+                _message.To.Add(new MailboxAddress(email));
+            }
+
+            public void RemoveTo(string email)
+            {
+                var address = _message.To.OfType<MailboxAddress>().FirstOrDefault(x => x.Address == email);
+                if (address != null)
+                    _message.To.Remove(address);
+            }
+
+            public string AddResource(string filePath)
+            {
+                var resource = _bodyBuilder.LinkedResources.Add(filePath);
+                resource.ContentId = MimeUtils.GenerateMessageId();
+
+                return resource.ContentId;
+            }
         }
     }
 }
