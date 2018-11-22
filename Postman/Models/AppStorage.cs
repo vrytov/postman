@@ -8,9 +8,7 @@ namespace Postman.Models
 {
     public class AppStorage
     {
-        public List<User> Users { get; set; }
-        public List<EmailServerConfiguration> EmailServers { get; set; }
-
-        public List<Message> Messages { get; set; }
+        public List<User> Users { get; set; } = new List<User>();
+        public List<EmailServerConfiguration> EmailServers { get; set; } = new List<EmailServerConfiguration>();
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Postman.Models
 {
-    public interface IMessage
+    public interface IMessageImplementation
     {
         IEnumerable<KeyValuePair<string, string>> Headers { get; }
 
-        IList<string> From { get; }
-        IList<string> To { get; }
+        IEnumerable<string> From { get; }
+        IEnumerable<string> To { get; }
 
         string Subject { get; }
         string TextBody { get; }

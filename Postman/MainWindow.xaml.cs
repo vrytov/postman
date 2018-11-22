@@ -34,38 +34,54 @@ namespace Postman
 
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            var storage = new AppStorage();
+            var server = new EmailServerConfiguration()
+                {DefaultInboxEmailProtocol = InboxEmailProtocol.Imap, Name = "testserver"};
+
+            server.ImapCredentials.Address = "test@test.ru";
+            server.ImapCredentials.Port = 1111;
+            server.ImapCredentials.UseEncryption = false;
+
+            server.Pop3Credentials.Address = "pop2@mail.com";
+            server.Pop3Credentials.Port = 101;
+            server.Pop3Credentials.UseEncryption = true;
+
+            storage.EmailServers.Add(server);
+
+            var user = new User() { Name = "testuser"};
+            var auth = new AuthCredentials() { Login = "login", Password = "password", ServerConfiguration = server};
+
+            user.CredentialsList.Add(auth);
+
+            storage.Users.Add(user);
+
+            var json = JsonConvert.SerializeObject(storage);
+
+            var st2 = JsonConvert.DeserializeObject<AppStorage>(json);
+
+
             
             // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
             client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
             client.Connect("imap.mail.ru", 993, true);
 
-            client.Authenticate("stalker_liss@mail.ru", "324umdFPT2103_");
+            client.Authenticate("test@mail.ru", "test");
 
             client.Inbox.Open(FolderAccess.ReadOnly);
 
             var test = client.GetFolder(client.PersonalNamespaces[0]);
 
-            var context = new MessageContext();
-
-            foreach (var message in context.Messages)
-            {
-                var str = new MemoryStream(message.Content);
-                var m = MimeMessage.Load(str);
-
-            }
-
-            for (int i = 0; i < 0; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var m = client.Inbox.GetMessage(i);
+                var message = MessageFactory.CreateMessageFromImplementation(m);
+
                 var str = new MemoryStream();
                 m.WriteTo(str);
-
-                context.Messages.Add(new Entities.Message() {Content = str.ToArray()});
             }
-
-            context.SaveChanges();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

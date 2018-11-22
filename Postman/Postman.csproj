@@ -180,14 +180,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\IMessageBuilder.cs" />
+    <Compile Include="Models\IMessageBuilderImplementation.cs" />
     <Compile Include="Models\MailkitMessage.cs" />
+    <Compile Include="Models\MessageBuilder.cs" />
     <Compile Include="Models\MessageContext.cs" />
     <Compile Include="Models\AppStorage.cs" />
     <Compile Include="Models\AuthCredentials.cs" />
     <Compile Include="Models\EmailServerConfiguration.cs" />
-    <Compile Include="Models\IMessage.cs" />
+    <Compile Include="Models\IMessageImplementation.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\MessageFactory.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

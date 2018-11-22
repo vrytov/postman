@@ -9,21 +9,21 @@ using MimeKit.Utils;
 
 namespace Postman.Models
 {
-    public class MailkitMessage : IMessage
+    public class MailkitMessage : IMessageImplementation
     {
         public IEnumerable<KeyValuePair<string, string>> Headers
         {
             get { return Message.Headers.Select(x => new KeyValuePair<string, string>(x.Field, x.Value)); }
         }
 
-        public IList<string> From
+        public IEnumerable<string> From
         {
-            get { return Message.From.OfType<MailboxAddress>().Select(x => x.Address).ToList(); }
+            get { return Message.From.OfType<MailboxAddress>().Select(x => x.Address); }
         }
 
-        public IList<string> To
+        public IEnumerable<string> To
         {
-            get { return Message.To.OfType<MailboxAddress>().Select(x => x.Address).ToList(); }
+            get { return Message.To.OfType<MailboxAddress>().Select(x => x.Address); }
         }
 
         public string Subject
@@ -48,18 +48,26 @@ namespace Postman.Models
             Message.WriteTo(stream);
         }
 
-        public static IMessage CreateFromStream(Stream stream)
+        public static IMessageImplementation CreateFromStream(Stream stream)
         {
-            return new MailkitMessage{ Message = MimeMessage.Load(stream) };
+            return new MailkitMessage { Message = MimeMessage.Load(stream) };
         }
 
-        public class MessageBuilder : IMessageBuilder
+        public static IMessageImplementation CreateFromImplementation(MimeMessage message)
+        {
+            if (message == null)
+                return null;
+
+            return new MailkitMessage { Message = message };
+        }
+
+        public class MessageBuilder : IMessageBuilderImplementation
         {
             private MimeMessage _message = new MimeMessage();
             private MailkitMessage _result = new MailkitMessage();
             private BodyBuilder _bodyBuilder = new BodyBuilder();
 
-            public IMessage Result
+            public IMessageImplementation Result
             {
                 get
                 {
@@ -120,6 +128,11 @@ namespace Postman.Models
                 resource.ContentId = MimeUtils.GenerateMessageId();
 
                 return resource.ContentId;
+            }
+
+            public void AddAttachment(string filePath)
+            {
+                _bodyBuilder.Attachments.Add(filePath);
             }
         }
     }

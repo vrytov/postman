@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Postman.Models
 {
-    public interface IMessageBuilder
+    public interface IMessageBuilderImplementation
     {
         void Reset();
-        IMessage Result { get; }
+        IMessageImplementation Result { get; }
 
         void SetTextBody(string textBody);
         void SetHtmlBody(string htmlBody);
@@ -21,5 +21,6 @@ namespace Postman.Models
         void RemoveTo(string email);
 
         string AddResource(string filePath);
+        void AddAttachment(string filePath);
     }
 }

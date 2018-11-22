@@ -9,8 +9,6 @@ namespace Postman.Models
 {
     public class MessageContext : DbContext
     {
-        private static bool _created = false;
-
         public MessageContext()
         {
             Database.EnsureCreated();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Postman"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1553.175" Width="1050">
+        Title="MainWindow" Height="696.101" Width="1050">
     <Grid>
         <TextBlock x:Name="TextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="TextBlock2" HorizontalAlignment="Left" Margin="477,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="3.673,3.188"/>
