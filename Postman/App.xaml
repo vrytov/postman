@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Postman"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Image x:Key="AddIcon" Source="Resources/add.png"/>
     </Application.Resources>
 </Application>

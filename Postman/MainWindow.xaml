@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Postman"
         mc:Ignorable="d"
-        Title="MainWindow" Height="696.101" Width="1050">
-    <Grid>
-        <TextBlock x:Name="TextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="TextBlock2" HorizontalAlignment="Left" Margin="477,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="3.673,3.188"/>
-        <Button Click="ButtonBase_OnClick" Content="Button" HorizontalAlignment="Left" Margin="957,8,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.973,-0.35"/>
-    </Grid>
+        Title="MainWindow" Height="358.601" Width="595.5">
+    <ScrollViewer>
+        <StackPanel x:Name="StackPanel">
+            <Button Click="ButtonBase_OnClick" Width="21" Height="21"></Button>
+        </StackPanel>
+    </ScrollViewer>
 </Window>

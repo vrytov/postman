@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Postman.Views.EditUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Postman.Views"
+             mc:Ignorable="d" Height="272" Width="687">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="5" Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" CornerRadius="50" Grid.Column="0" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="MediumVioletRed">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" FontWeight="Bold" Foreground="White" Text="Test"></TextBlock>
+            </Border>
+
+            <Grid Margin="5, 0, 0, 0" Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" FontSize="20" FontWeight="DemiBold" Text="test" VerticalAlignment="Top"/>
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="Gray" TextTrimming="WordEllipsis" MaxHeight="40" Text="description" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1" RowSpan="3">
+            
+        </Grid>
+    </Grid>
+</UserControl>

@@ -20,14 +20,10 @@ using MimeKit;
 using Newtonsoft.Json;
 using Postman.Entities;
 using Postman.Models;
+using Postman.Views;
 
 namespace Postman
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    ///
-    
     public partial class MainWindow : Window
     {
         private ImapClient client = new ImapClient();
@@ -67,26 +63,26 @@ namespace Postman
             client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
             client.Connect("imap.mail.ru", 993, true);
-
+            
             client.Authenticate("test@mail.ru", "test");
 
             client.Inbox.Open(FolderAccess.ReadOnly);
 
             var test = client.GetFolder(client.PersonalNamespaces[0]);
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1; i++)
             {
                 var m = client.Inbox.GetMessage(i);
                 var message = MessageFactory.CreateMessageFromImplementation(m);
-
-                var str = new MemoryStream();
-                m.WriteTo(str);
+                var tb = new TextBlock();
+                tb.Text = message.From.ToList()[0] + ": " + message.TextBody;
+                StackPanel.Children.Add(tb);
             }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            new UserSettingsWindow().ShowDialog();
         }
     }
 }
