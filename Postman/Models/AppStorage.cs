@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
+using System.Windows;
 using Newtonsoft.Json;
 
 namespace Postman.Models
@@ -10,7 +13,7 @@ namespace Postman.Models
     public class AppStorage
     {
         public List<User> Users { get; set; } = new List<User>();
-        public List<EmailServerConfiguration> EmailServers { get; set; } = new List<EmailServerConfiguration>();
+        public List<EmailServerCredentials> EmailServers { get; set; } = new List<EmailServerCredentials>();
 
         private AppStorage()
         {
@@ -19,20 +22,42 @@ namespace Postman.Models
 
         private static AppStorage _instance;
 
+        private const string _storageFileName = "data.json";
+
+        private static void InitializeDefaultEmailServers(List<EmailServerCredentials> servers)
+        {
+            var preset = new EmailServerCredentials
+            {
+                Name = "Gmail",
+                Pop3 = { Address = "pop.gmail.com", Port = 995, UseSslEncryption = true},
+                Smtp = { Address = "smtp.gmail.com", Port = 465, UseSslEncryption = true, UseTlsEncryption = false},
+                Imap = { Address = "imap.gmail.com", Port = 993, UseSslEncryption = true}
+            };
+
+            servers.Add(preset);
+        }
+
         public static AppStorage Instance
         {
             get
             {
-                if (_instance == null)
-                    _instance = JsonConvert.DeserializeObject()
-            }
-        }
+                if (_instance != null)
+                    return _instance;
 
-        public static AppStorage getInstance()
-        {
-            if (instance == null)
-                instance = new Singleton();
-            return instance;
+                var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + _storageFileName;
+                if (!File.Exists(path))
+                {
+                    _instance = new AppStorage();
+                    InitializeDefaultEmailServers(_instance.EmailServers);
+                }
+                else
+                {
+                    var json = File.ReadAllText(path);
+                    _instance = JsonConvert.DeserializeObject(json) as AppStorage;
+                }
+
+                return _instance;
+            }
         }
     }
 }

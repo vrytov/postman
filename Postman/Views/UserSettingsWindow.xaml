@@ -54,5 +54,8 @@
         <GridSplitter HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="3" Grid.Column="1">
 
         </GridSplitter>
+
+        <local:EditUserView Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        </local:EditUserView>
     </Grid>
 </Window>
