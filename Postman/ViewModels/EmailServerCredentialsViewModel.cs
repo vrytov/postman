@@ -10,7 +10,7 @@ namespace Postman.ViewModels
 {
     public class EmailServerCredentialsViewModel
     {
-        public ImageSource IconPath { get; set; }
+        public ImageSource Icon { get; set; }
         public EmailServerCredentials Model { get; set; }
     }
 }

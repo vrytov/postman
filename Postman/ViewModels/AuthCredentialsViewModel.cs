@@ -19,7 +19,7 @@ namespace Postman.ViewModels
             ServerCredentials = new EmailServerCredentialsViewModel()
             {
                 Model = _credentials.ServerCredentials,
-                IconPath = new BitmapImage(new Uri(@"/Resources/google.png", UriKind.Relative))            
+                Icon = new BitmapImage(new Uri(@"/Resources/google.png", UriKind.Relative))            
             };
         }
 

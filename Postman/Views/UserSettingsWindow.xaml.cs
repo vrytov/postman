@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using Postman.ViewModels;
 
 namespace Postman.Views
@@ -18,7 +19,7 @@ namespace Postman.Views
     /// <summary>
     /// Логика взаимодействия для UserSettingsWindow.xaml
     /// </summary>
-    public partial class UserSettingsWindow : Window
+    public partial class UserSettingsWindow : MetroWindow
     {
         public UserSettingsWindow()
         {

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
@@ -24,7 +25,7 @@ using Postman.Views;
 
 namespace Postman
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private ImapClient client = new ImapClient();
 
@@ -43,15 +44,6 @@ namespace Postman
             client.Inbox.Open(FolderAccess.ReadOnly);
 
             var test = client.GetFolder(client.PersonalNamespaces[0]);
-
-            for (int i = 0; i < 1; i++)
-            {
-                var m = client.Inbox.GetMessage(i);
-                var message = MessageFactory.CreateMessageFromImplementation(m);
-                var tb = new TextBlock();
-                tb.Text = message.From.ToList()[0] + ": " + message.TextBody;
-                StackPanel.Children.Add(tb);
-            }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
