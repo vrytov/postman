@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Postman.ViewModels;
 
 namespace Postman.Views
 {
@@ -23,6 +24,8 @@ namespace Postman.Views
         public EditUserView()
         {
             InitializeComponent();
+
+            DataContext = new EditUserViewModel();
         }
     }
 }

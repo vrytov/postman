@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -18,6 +19,9 @@ namespace Postman.ViewModels
         public UserViewModel(User user)
         {
             _user = user;
+            _color = GetColorFromName(_user.Name);
+            AuthCredentials = new ObservableCollection<AuthCredentialsViewModel>(
+                _user.CredentialsList.Select(x => new AuthCredentialsViewModel(x)));
         }
 
         private static readonly List<SolidColorBrush> _colors = new List<SolidColorBrush>
@@ -50,6 +54,8 @@ namespace Postman.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
+
+        public ObservableCollection<AuthCredentialsViewModel> AuthCredentials { get; set; }
 
         public string ShortName
         {

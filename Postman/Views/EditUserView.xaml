@@ -5,23 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Postman.Views"
              xmlns:models="clr-namespace:Postman.Models"
-             mc:Ignorable="d" Height="375" Width="289">
+             xmlns:viewModels="clr-namespace:Postman.ViewModels"
+             mc:Ignorable="d" Height="186" Width="221">
     <UserControl.Resources>
-        <DataTemplate x:Key="CredentialsTemplate" DataType="{x:Type models:AuthCredentials}">
+        <DataTemplate x:Key="CredentialsTemplate" DataType="{x:Type viewModels:AuthCredentialsViewModel}">
             <Grid Height="50">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Image Name="ServerIcon" Grid.Column="0" Source="{Binding ServerConfiguration.ServerCredentials.IconPath}" Height="48" Width="48"></Image>
+                <Image Name="ServerIcon" Grid.Column="0" Source="{Binding ServerCredentials.IconPath}" Height="48" Width="48"></Image>
                 <TextBlock Grid.Column="1" Text="{Binding Login}" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="13" Foreground="DarkSlateGray" />
-                <Button Grid.Column="2" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                <Button Grid.Column="2" Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Center" BorderThickness="0" Background="Transparent">
                     <Image Source="../Resources/remove.png"></Image>
                 </Button>
             </Grid>
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding ServerConfiguration.ServerCredentials.IconPath}" Value="">
+                <DataTrigger Binding="{Binding ServerCredentials.IconPath}" Value="">
                     <Setter TargetName="ServerIcon" Property="Visibility" Value="Collapsed" />
                 </DataTrigger>
             </DataTemplate.Triggers>
@@ -33,8 +34,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Margin="5" Grid.Column="0" Grid.Row="0">
@@ -47,11 +47,11 @@
                 <RowDefinition Height="70"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" CornerRadius="50" Grid.Column="0" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="MediumVioletRed">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" FontWeight="Bold" Foreground="White" Text="Test"></TextBlock>
+            <Border Grid.Row="0" CornerRadius="50" Grid.Column="0" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding Path=Color}">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="White" Text="{Binding Path=ShortName}"></TextBlock>
             </Border>
             <StackPanel Margin="5, 5, 0, 0" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                <TextBlock FontSize="20" FontWeight="DemiBold" Text="test" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock FontSize="20" FontWeight="DemiBold" Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBlock Margin="5, 0, 0, 0" FontSize="13" Foreground="Blue" Text="edit" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </StackPanel>
         </Grid>
@@ -62,18 +62,19 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="Accounts:"/>
-            <ListView Visibility="Collapsed" ItemTemplate="{StaticResource CredentialsTemplate}" Grid.Row="1"></ListView>
+            <ListView ItemTemplate="{StaticResource CredentialsTemplate}" ItemsSource="{Binding AuthCredentials}"
+                      Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"></ListView>
         </Grid>
 
         <Grid Visibility="Collapsed" Grid.Row="1" Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Image Name="ServerIcon" Grid.Column="0" Source="../Resources/google.png" Height="48" Width="48"></Image>
             <TextBlock Grid.Column="1" Text="mail@gmail.com" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="13" Foreground="DarkSlateGray" />
-            <Button Grid.Column="2" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+            <Button Grid.Column="2" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent">
                 <Image Source="../Resources/remove.png"></Image>
             </Button>
         </Grid>

@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using Postman.Models;
 using Postman.Properties;
 
 namespace Postman.ViewModels
@@ -25,18 +26,21 @@ namespace Postman.ViewModels
             }
         }
 
-        public ObservableCollection<UserViewModel> Users { get; set; }
+        public ObservableCollection<UserViewModel> Users { get; set; } = new ObservableCollection<UserViewModel>();
 
         public UserSettingsViewModel()
         {
-            Users = new ObservableCollection<UserViewModel>()
-            {
-                new UserViewModel() { Name = "t2est", Description = "descr \r\n test \r\n test 2"},
-                new UserViewModel() { Name = "tzest", Description = "descr"},
-                new UserViewModel() { Name = "tpest", Description = "descr"},
-                new UserViewModel() { Name = "toest", Description = "descr"},
-                new UserViewModel() { Name = "tkest", Description = "descr"},
-            };
+            var user = new User() {Name = "User"};
+            var auth = new AuthCredentials();
+            auth.Login = "login@mail.ru";
+            auth.Password = "test";
+            auth.ServerCredentialsId = 0;
+            user.CredentialsList.Add(auth);
+
+            var z = auth.ServerCredentials;
+            
+            Users.Add(new UserViewModel(user));
+            AppStorage.Instance.Users.ForEach(x => Users.Add(new UserViewModel(x)));
         }
     }
 }

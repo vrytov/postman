@@ -166,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\EmailServerCredentials.cs" />
+    <Compile Include="ViewModels\AuthCredentialsViewModel.cs" />
+    <Compile Include="ViewModels\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\EmailServerCredentialsViewModel.cs" />
     <Compile Include="ViewModels\UserSettingsViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -204,7 +208,6 @@
     <Compile Include="Models\MessageContext.cs" />
     <Compile Include="Models\AppStorage.cs" />
     <Compile Include="Models\AuthCredentials.cs" />
-    <Compile Include="Models\EmailServerConfiguration.cs" />
     <Compile Include="Models\IMessageImplementation.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageFactory.cs" />

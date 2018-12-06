@@ -7,6 +7,12 @@ using Newtonsoft.Json;
 
 namespace Postman.Models
 {
+    public enum InboxEmailProtocol
+    {
+        Imap,
+        Pop3
+    }
+
     public class AuthCredentials
     {
         public string Login { get; set; }
@@ -16,6 +22,20 @@ namespace Postman.Models
         
         public string EncryptedPassword { get; set; }
 
-        public EmailServerConfiguration ServerConfiguration { get; set; }
+        public InboxEmailProtocol DefaultInboxEmailProtocol { get; set; } = InboxEmailProtocol.Pop3;
+
+        [JsonIgnore]
+        public EmailServerCredentials ServerCredentials
+        {
+            get
+            {
+                if (ServerCredentialsId >= AppStorage.Instance.EmailServers.Count)
+                    return null;
+
+                return AppStorage.Instance.EmailServers[ServerCredentialsId];
+            }
+        }
+
+        public int ServerCredentialsId { get; set; }
     }
 }

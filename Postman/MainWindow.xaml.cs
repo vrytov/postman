@@ -31,33 +31,7 @@ namespace Postman
         public MainWindow()
         {
             InitializeComponent();
-
-            var storage = new AppStorage();
-            var server = new EmailServerConfiguration()
-                {DefaultInboxEmailProtocol = InboxEmailProtocol.Imap, Name = "testserver"};
-
-            server.ImapCredentials.Address = "test@test.ru";
-            server.ImapCredentials.Port = 1111;
-            server.ImapCredentials.UseEncryption = false;
-
-            server.Pop3Credentials.Address = "pop2@mail.com";
-            server.Pop3Credentials.Port = 101;
-            server.Pop3Credentials.UseEncryption = true;
-
-            storage.EmailServers.Add(server);
-
-            var user = new User() { Name = "testuser"};
-            var auth = new AuthCredentials() { Login = "login", Password = "password", ServerConfiguration = server};
-
-            user.CredentialsList.Add(auth);
-
-            storage.Users.Add(user);
-
-            var json = JsonConvert.SerializeObject(storage);
-
-            var st2 = JsonConvert.DeserializeObject<AppStorage>(json);
-
-
+            return;
             
             // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
             client.ServerCertificateValidationCallback = (s, c, h, e) => true;

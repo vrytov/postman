@@ -55,7 +55,7 @@
 
         </GridSplitter>
 
-        <local:EditUserView Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <local:EditUserView DataContext="{Binding SelectedUser}" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,234,10">
         </local:EditUserView>
     </Grid>
 </Window>
