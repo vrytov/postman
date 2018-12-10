@@ -68,16 +68,14 @@ namespace Postman.ViewModels
         {
             get { return _color; }
         }
-
-        private string _description;
-
-        public string Description
+        
+        public string Password
         {
-            get { return _description; }
+            get { return _user.Password; }
             set
             {
-                _description = value;
-                OnPropertyChanged(nameof(Description));
+                _user.Password = value;
+                OnPropertyChanged(nameof(Password));
             }
         }
 

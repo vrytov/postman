@@ -8,8 +8,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using MahApps.Metro.Controls.Dialogs;
+using Postman.Common;
 using Postman.Models;
 using Postman.Properties;
+using Postman.Views;
 
 namespace Postman.ViewModels
 {
@@ -27,6 +30,22 @@ namespace Postman.ViewModels
         }
 
         public ObservableCollection<UserViewModel> Users { get; set; } = new ObservableCollection<UserViewModel>();
+
+        private RelayCommand _addUserCommand;
+        public RelayCommand AddUserCommand
+        {
+            get
+            {
+                return _addUserCommand ??
+                       (_addUserCommand = new RelayCommand(x => AddUser()));
+            }
+        }
+
+        private void AddUser()
+        {
+            var d = new EditUserView(new UserViewModel(new User() { Name = "test" }));
+            d.ShowDialog();
+        }
 
         public UserSettingsViewModel()
         {

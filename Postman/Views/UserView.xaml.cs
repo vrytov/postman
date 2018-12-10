@@ -10,22 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 using Postman.ViewModels;
 
 namespace Postman.Views
 {
     /// <summary>
-    /// Логика взаимодействия для UserSettingsWindow.xaml
+    /// Логика взаимодействия для EditUserView.xaml
     /// </summary>
-    public partial class UserSettingsWindow : MetroWindow
+    public partial class UserView : UserControl
     {
-        public UserSettingsWindow()
+        public UserView()
         {
             InitializeComponent();
-
-            DataContext = new UserSettingsViewModel();
         }
     }
 }

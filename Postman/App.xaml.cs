@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Postman.Models;
 
 namespace Postman
 {
@@ -15,7 +16,7 @@ namespace Postman
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            
+            var i = AppStorage.Instance;
         }
     }
 }

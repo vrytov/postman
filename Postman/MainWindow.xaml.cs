@@ -48,7 +48,7 @@ namespace Postman
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            new UserSettingsWindow().ShowDialog();
+            new UsersSettingsWindow().ShowDialog();
         }
     }
 }
